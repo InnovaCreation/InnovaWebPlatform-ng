@@ -1,6 +1,9 @@
 'use strict';
 
-const Hapi = require('@hapi/hapi');
+const Hapi = require('@hapi/hapi')
+const Pm = require('./projects.js')
+
+let pm = new Pm("projectsDB.json");
 
 const init = async () => {
 
@@ -13,19 +16,20 @@ const init = async () => {
         method: 'GET',
         path: '/',
         handler: (request, h) => {
-
-            return 'Hello World!';
-        }
+            return 'Hello World!'
+        },
     });
 
-    await server.start();
-    console.log('Server running on %s', server.info.uri);
+    pm.createRoutes(server)
+
+    await server.start()
+    console.log('Server running on %s', server.info.uri)
 };
 
 process.on('unhandledRejection', (err) => {
 
-    console.log(err);
-    process.exit(1);
+    console.log(err)
+    process.exit(1)
 });
 
 init();
