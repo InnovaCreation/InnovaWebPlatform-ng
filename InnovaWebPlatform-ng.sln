@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "InnovaWebPlatform-ng", "InnovaWebPlatform-ng.njsproj", "{04CEA87F-A7E8-41EB-A617-402D6E4FA275}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04CEA87F-A7E8-41EB-A617-402D6E4FA275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04CEA87F-A7E8-41EB-A617-402D6E4FA275}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04CEA87F-A7E8-41EB-A617-402D6E4FA275}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04CEA87F-A7E8-41EB-A617-402D6E4FA275}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE3F635D-0F50-467A-8E84-315368CE9471}
+	EndGlobalSection
+EndGlobal

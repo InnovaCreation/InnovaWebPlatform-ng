@@ -1,0 +1,12 @@
+{
+  "name": "innova-web-platform-ng",
+  "version": "0.0.0",
+  "description": "InnovaWebPlatform-ng",
+  "main": "server.js",
+  "author": {
+    "name": "InnovaCreation"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^18.4.0"
+  }
+}
