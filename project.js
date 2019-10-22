@@ -7,6 +7,7 @@ let Project = class {
         this.projName = projName
         this.projRepo = repo
         this.projDesc = desc
+        this.subProjects = {}
     }
 }
 

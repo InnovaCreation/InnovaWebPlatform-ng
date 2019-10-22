@@ -1,7 +1,18 @@
+const _ = require('lodash');
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const Project = require('./project.js')
 const uuidv4 = require('uuid/v4')
+
+function findProjByUUID(root, id) {
+    console.log(root)
+    if (!root) return undefined
+    if (root.get(id)) return root.get(id)
+    root.forEach(root, (p) => {
+        let result = findProjByUUID(p.subProjects, id)
+        if (result) return result
+    })
+}
 
 let Pm = class {
     constructor(projDBFile) {
@@ -12,9 +23,16 @@ let Pm = class {
         this.db.defaults({ projects: {} }).write()
     }
 
-    createProject(proj) {
+    createProject(proj, parent = "") {
+        let root = this.db.get('projects')
         let uuid = uuidv4()
-        this.db.get('projects').set(uuid, proj).write()
+        if (parent) {
+            let result = findProjByUUID(root, parent)
+            if (!result) return undefined
+            result.get('subProjects').set(uuid, proj).write()
+        } else {
+            root.set(uuid, proj).write()
+        }
         return uuid
     }
 
@@ -48,7 +66,9 @@ let Pm = class {
                         return { status: "failed", error: "Request doesn't contain projDesc field" }
                     }
                     let proj = new Project(payload.projName, payload.projRepo, payload.projDesc)
-                    let uuid = this.createProject(proj)
+                    let uuid = this.createProject(proj, payload.projParent)
+
+                    if (!uuid) return { status: "failed", error: "Failed to create project" }
 
                     return { status: "success", objectUUID: uuid }
                 }
