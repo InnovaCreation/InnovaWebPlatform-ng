@@ -27,7 +27,7 @@ let Pm = class {
             method: 'GET',
             path: '/api/getProjects',
             handler: (request, h) => {
-                return JSON.stringify(this.getProjects())
+                return this.getProjects()
             },
         });
 
@@ -41,7 +41,13 @@ let Pm = class {
                     if (!payload.projName) {
                         return { status: "failed", error: "Request doesn't contain projName field" }
                     }
-                    let proj = new Project(payload.projName)
+                    if (!payload.projRepo) {
+                        return { status: "failed", error: "Request doesn't contain projRepo field" }
+                    }
+                    if (!payload.projDesc) {
+                        return { status: "failed", error: "Request doesn't contain projDesc field" }
+                    }
+                    let proj = new Project(payload.projName, payload.projRepo, payload.projDesc)
                     let uuid = this.createProject(proj)
 
                     return { status: "success", objectUUID: uuid }

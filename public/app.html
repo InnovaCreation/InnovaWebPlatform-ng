@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Innovacreation Web Platform</title>
@@ -6,17 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- UI Kit -->
-    <link rel="stylesheet" href="css/uikit.min.css" />
-    <script src="js/uikit.min.js"></script>
-    <script src="js/uikit-icons.min.js"></script>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js"></script>
 
     <!-- Vue.js -->
     <!-- development version, includes helpful console warnings -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
     <div id="app">
-        {{ message }}
+        <div>
+            <input v-model="createNew.name" />
+            <input v-model="createNew.repo" />
+            <input v-model="createNew.desc" />
+            <button class="uk-button uk-button-default" v-on:click="createProject">Create</button>
+        </div>
+        <div class="uk-card uk-card-body uk-card-default uk-margin" v-for="proj in projects">
+            <h3>{{ proj.projName }}</h3>
+            {{ proj.projRepo }}
+            {{ proj.projDesc }}
+        </div>
     </div>
     <script src="app.js"></script>
 </body>
