@@ -23,8 +23,10 @@
             <input v-model="createNew.name" />
             <input v-model="createNew.repo" />
             <input v-model="createNew.desc" />
-            <input v-model="createNew.parent" />
+            UUID:
+            <input v-model="createNew.UUID" />
             <button class="uk-button uk-button-default" v-on:click="createProject">Create</button>
+            <button class="uk-button uk-button-default" v-on:click="modifyProject">Modify</button>
         </div>
         <project v-for="(proj, id) in projects" v-bind:proj="proj" v-bind:id="id"></project>
     </div>

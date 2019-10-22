@@ -8,8 +8,10 @@ Vue.component('project', {
             <h3> {{ proj.projName }}</h3>
             {{ proj.projRepo }}
             {{ proj.projDesc }}
+            <ul>
+                <li v-for="subid in proj.subProjects">Subproject: {{ subid }}</li>
+            </ul>
             <p>{{ id }}</p>
-            <project v-for="(p, i) in proj.subProjects" v-bind:proj="p" v-bind:id="i"></project>
         </div>
     `
 })
@@ -23,7 +25,7 @@ var app = new Vue({
                 name: "",
                 repo: "",
                 desc: "",
-                parent: ""
+                UUID: ""
             }
         }
     },
@@ -40,7 +42,19 @@ var app = new Vue({
                 projName: this.createNew.name,
                 projRepo: this.createNew.repo,
                 projDesc: this.createNew.desc,
-                projParent: this.createNew.parent
+                projParent: this.createNew.UUID
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        modifyProject: function (event) {
+            axios.post('/api/modifyProject', {
+                projName: this.createNew.name,
+                projRepo: this.createNew.repo,
+                projDesc: this.createNew.desc,
+                projUUID: this.createNew.UUID
             }).then(function (response) {
                 console.log(response);
             }).catch(function (error) {

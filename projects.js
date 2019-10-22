@@ -4,16 +4,6 @@ const FileSync = require('lowdb/adapters/FileSync')
 const Project = require('./project.js')
 const uuidv4 = require('uuid/v4')
 
-function findProjByUUID(root, id) {
-    console.log(root)
-    if (!root) return undefined
-    if (root.get(id)) return root.get(id)
-    root.forEach(root, (p) => {
-        let result = findProjByUUID(p.subProjects, id)
-        if (result) return result
-    })
-}
-
 let Pm = class {
     constructor(projDBFile) {
         this.file = projDBFile
@@ -24,16 +14,35 @@ let Pm = class {
     }
 
     createProject(proj, parent = "") {
-        let root = this.db.get('projects')
         let uuid = uuidv4()
+        this.db.get('projects').set(uuid, proj).write()
         if (parent) {
-            let result = findProjByUUID(root, parent)
-            if (!result) return undefined
-            result.get('subProjects').set(uuid, proj).write()
-        } else {
-            root.set(uuid, proj).write()
+            let p = this.db.get('projects').get(parent)
+            if (!p) return undefined
+            p.get('subProjects').push(uuid).write()
         }
         return uuid
+    }
+
+    setProjectName(uuid, name) {
+        let proj = this.db.get('projects').get(uuid)
+        if (!proj) return undefined
+        proj.set('projName', name).write()
+        return proj
+    }
+
+    setProjectDesc(uuid, desc) {
+        let proj = this.db.get('projects').get(uuid)
+        if (!proj) return undefined
+        proj.set('projDesc', desc).write()
+        return proj
+    }
+
+    setProjectRepo(uuid, repo) {
+        let proj = this.db.get('projects').get(uuid)
+        if (!proj) return undefined
+        proj.set('projRepo', repo).write()
+        return proj
     }
 
     getProjects() {
@@ -71,6 +80,38 @@ let Pm = class {
                     if (!uuid) return { status: "failed", error: "Failed to create project" }
 
                     return { status: "success", objectUUID: uuid }
+                }
+
+                return { status: "failed", error: "Empty payload" }
+            }
+        })
+
+        server.route({
+            method: 'POST',
+            path: '/api/modifyProject',
+            handler: (request) => {
+                let payload = request.payload
+
+                if (payload) {
+                    if (!payload.projUUID) {
+                        return { status: "failed", error: "Request doesn't contain projUUID field" }
+                    }
+
+                    let proj = undefined
+
+                    if (payload.projName) {
+                        proj = proj || this.setProjectName(payload.projUUID, payload.projName)
+                    }
+                    if (payload.projDesc) {
+                        proj = proj || this.setProjectDesc(payload.projUUID, payload.projDesc)
+                    }
+                    if (payload.projRepo) {
+                        proj = proj || this.setProjectRepo(payload.projUUID, payload.projRepo)
+                    }
+
+                    if (!proj) return { status: "failed", error: "Failed to modify project" }
+
+                    return { status: "success" }
                 }
 
                 return { status: "failed", error: "Empty payload" }
