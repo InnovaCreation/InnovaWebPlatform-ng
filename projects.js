@@ -6,7 +6,7 @@ const uuidv4 = require('uuid/v4')
 let Pm = class {
     constructor(projDBFile) {
         this.file = projDBFile
-        this.adapter = new FileSync('db.json')
+        this.adapter = new FileSync(this.file)
         this.db = low(this.adapter)
 
         this.db.defaults({ projects: {} }).write()
