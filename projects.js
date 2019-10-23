@@ -24,6 +24,10 @@ let Pm = class {
         return uuid
     }
 
+    deleteProject(uuid) {
+        return this.db.get('projects').remove({ uuid: uuid }).write()
+    }
+
     setProjectName(uuid, name) {
         let proj = this.db.get('projects').get(uuid)
         if (!proj) return undefined
@@ -57,6 +61,7 @@ let Pm = class {
                 return this.getProjects()
             },
         });
+
 
         server.route({
             method: 'POST',
@@ -114,6 +119,32 @@ let Pm = class {
                     return { status: "success" }
                 }
 
+                return { status: "failed", error: "Empty payload" }
+            }
+        })
+
+
+
+        server.route({
+            method: 'POST',
+            path: '/api/deleteProject',
+            handler: (request) => {
+                let payload = request.payload
+
+                if (payload) {
+                    if (!payload.projUUID) {
+                        return {
+                            status: "failed", error: "Request doesn't contain proUUID field"
+                        }
+                    }
+                    let uuid = payload.projUUID
+                    if (!uuid) {
+                        return { status: "failed", error: "Failed to create project" }
+                    }
+
+                    this.deleteProject(uuid)
+                    return { status: "success" }
+                }
                 return { status: "failed", error: "Empty payload" }
             }
         })
