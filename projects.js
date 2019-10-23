@@ -123,8 +123,6 @@ let Pm = class {
             }
         })
 
-
-
         server.route({
             method: 'POST',
             path: '/api/deleteProject',
@@ -137,12 +135,8 @@ let Pm = class {
                             status: "failed", error: "Request doesn't contain proUUID field"
                         }
                     }
-                    let uuid = payload.projUUID
-                    if (!uuid) {
-                        return { status: "failed", error: "Failed to create project" }
-                    }
 
-                    this.deleteProject(uuid)
+                    this.deleteProject(payload.projUUID)
                     return { status: "success" }
                 }
                 return { status: "failed", error: "Empty payload" }
