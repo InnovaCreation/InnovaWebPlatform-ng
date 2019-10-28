@@ -15,6 +15,14 @@
 2. projects.js包括项目管理模块
 3. kanban.js包括kanban模块
 
+### API
+
+#### 项目管理API
+1. `/api/getProjects`
+2. `/api/createProject`
+3. `/api/modifyProject`
+4. `/api/deleteProject`
+
 ## 前端：
 
 使用Vue.js作为模板和渲染，使用Axio进行API调用，并使用UIKit作为排版组件。前端使用静态页
