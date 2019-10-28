@@ -3,7 +3,6 @@ projectsDB.json
 bin
 .vs
 obj
-*.njsproj
 *.njsproj.user
 
 # Logs
