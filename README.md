@@ -18,10 +18,41 @@
 ### API
 
 #### 项目管理API
-1. `/api/getProjects`
-2. `/api/createProject`
-3. `/api/modifyProject`
-4. `/api/deleteProject`
+1. `GET /api/getProjects`
+Return a list of projects in the JSON format. Each entry provides a instance of Project.
+
+2. `POST /api/createProject`
+Create a new project. The arguments are:
+    - `projName` required
+    - `projRepo` required
+    - `projDesc` required
+    - `projParent` when creating a subproject with parent uuid
+
+3. `POST /api/modifyProject`
+Modify an existing project. The arguments are:
+    - `projUUID` required. The UUID of the project that is going to be modified
+    - `projName` not required
+    - `projDesc` not required
+    - `projRepo` not required
+
+4. `POST /api/deleteProject`
+The API for delete an existing project. Call it with caution. The arguments are:
+    - `projUUID` required. Doesn't need to be correct.
+
+5. `GET /api/getTasks` (TODO)
+The API for getting the array of uuid of tasks belongning to this project. The arguments are:
+    - `projUUID` required
+
+### KanBan API
+1. `/api/getTask` (TODO)
+2. `/api/createTask` (TODO)
+3. `/api/modifyTask` (TODO)
+4. `/api/deleteTask` (TODO)
+4. `/api/getThread` (TODO)
+5. `/api/newThread` (TODO)
+6. `/api/modifyThread` (TODO)
+7. `/api/deleteThread` (TODO)
+8. `/api/assignUser2Task` (TODO)
 
 ## 前端：
 
@@ -44,6 +75,7 @@ value为项目实例
     - taskTitle: 任务标题
     - taskPriority: 任务优先级
     - taskAssignment: 项目负责人员（数组），存储负责人员（用户）的uuid
+    - taskStatus: 项目状态（e.g. 未完成，进行中）
     - rootThread: 该任务第一条帖子的uuid（也就是任务介绍帖）
 2. thread.js定义了每个看板帖子的数据结构
     - contentType: 定义该帖子的类型
@@ -51,9 +83,8 @@ value为项目实例
         - 如果类型为"file"，content是指向一个在同步Git Repo里的MarkDown文件。该文件
         会被作为该帖子的内容
     - content: 帖子内容
+    - nextThread: 下一条帖子的UUID（链表结构）
 3. 在kanban.js中，所有任务被存储在一个名为taks的KeyMap中。此处key为uuid，value为实例
-4. 在kanban.js中，所有不同阶段的项目（计划中、进行中、完成等）的项目的uuid会被存在不同
-的数组中。
 4. 在kanban.js中，所有帖子会被存储在threads的KeyMap中。此处key为uuid，value为实例
 
 #### 用户系统
