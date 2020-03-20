@@ -1,11 +1,11 @@
 // JavaScript source code
-// ¶¨Òå kanban ÈÎÎñµÄÊı¾İ½á¹¹
+// å®šä¹‰ kanban ä»»åŠ¡çš„æ•°æ®ç»“æ„
 
-// taskTitle£ºÈÎÎñ±êÌâ
-// taskPriority£ºÈÎÎñÓÅÏÈ¼¶
-// taskAssignment£ºÏîÄ¿¸ºÔğÈË£¨´ÅÅÌ£©£¬´æ´¢¸ºÔğÈË£¨ÓÃ»§£©µÄuuid
-// taskStatus£ºÏîÄ¿×´Ì¬£¨ÀıÈçÎ´Íê³É£¬½øĞĞÖĞ£©
-// rootThread£º¸ÃÈÎÎñµÚÒ»ÌõÌû×ÓµÄuuid£¨Ò²¾ÍÊÇÈÎÎñ½éÉÜÌû£©
+// taskTitleï¼šä»»åŠ¡æ ‡é¢˜
+// taskPriorityï¼šä»»åŠ¡ä¼˜å…ˆçº§
+// taskAssignmentï¼šé¡¹ç›®è´Ÿè´£äººï¼ˆç£ç›˜ï¼‰ï¼Œå­˜å‚¨è´Ÿè´£äººï¼ˆç”¨æˆ·ï¼‰çš„uuid
+// taskStatusï¼šé¡¹ç›®çŠ¶æ€ï¼ˆä¾‹å¦‚æœªå®Œæˆï¼Œè¿›è¡Œä¸­ï¼‰
+// rootThreadï¼šè¯¥ä»»åŠ¡ç¬¬ä¸€æ¡å¸–å­çš„uuidï¼ˆä¹Ÿå°±æ˜¯ä»»åŠ¡ä»‹ç»å¸–ï¼‰
 
 let Task = class {
     constructor(taskTitle, taskPriority, taskAssignment, taskStatus, rootThread) {

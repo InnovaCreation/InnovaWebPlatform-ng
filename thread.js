@@ -1,8 +1,8 @@
 // JavaScript source code
-// ¶¨Òå kanban Ìû×ÓµÄÊı¾İ½á¹¹
+// å®šä¹‰ kanban å¸–å­çš„æ•°æ®ç»“æ„
 
-// contentType = string or file ¶¨ÒåÌû×ÓÀàĞÍ
-// nextThread £ºÏÂÒ»ÌõÌû×ÓµÄUUID
+// contentType = string or file å®šä¹‰å¸–å­ç±»å‹
+// nextThread ï¼šä¸‹ä¸€æ¡å¸–å­çš„UUID
 
 let Thread = class {
     constructor(contentType, nextThread) {
