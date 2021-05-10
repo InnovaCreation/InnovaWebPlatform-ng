@@ -9,7 +9,7 @@
   "dependencies": {
     "@hapi/hapi": "^18.4.0",
     "@hapi/inert": "^5.2.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "lowdb": "^1.0.0",
     "uuid": "^3.3.3"
   }
